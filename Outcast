@@ -1,0 +1,47 @@
+/**
+ * An immutable data type for outcast detection.
+ */
+public class Outcast {
+    private WordNet wnet;
+    private SeparateChainingHashST nounst;
+
+    /**
+     * Constructs an Outcast object given a WordNet object.
+     * @param wordnet WordNet object.
+     */
+    public Outcast(WordNet wordnet) {
+        this.wnet = wordnet;
+    }
+
+    /**
+     * Returns the outcast noun from nouns.
+     * @param nouns nouns.
+     * @return the outcast noun from nouns.
+     */
+    public String outcast(String[] nouns) {
+    	String [] nounstring = nouns;
+    	int [] outcastarray = new int[nounstring.length()];
+        for ( String outcast: nouns) {
+        	if ( nouns)
+        }
+        for (int i = 0; i < nounst.size(); i++) {
+        	if (!nounst.contains(nouns[i])){
+        		
+        	}
+        }
+    }
+
+    /**
+     * Test client. [DO NOT EDIT]
+     * @param args command-line arguments.
+     */
+    public static void main(String[] args) {
+        WordNet wordnet = new WordNet(args[0], args[1]);
+        Outcast outcast = new Outcast(wordnet);
+        for (int t = 2; t < args.length; t++) {
+            In in = new In(args[t]);
+            String[] nouns = in.readAllStrings();
+            StdOut.println(args[t] + ": " + outcast.outcast(nouns));
+        }
+    }
+}
