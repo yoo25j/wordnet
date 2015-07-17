@@ -1,0 +1,102 @@
+ /**
+ * An immutable WordNet data type.
+ */
+public class WordNet {
+	private Digraph digraph;
+	private OrderedSet<String> nounset; //ST for nouns, key:noun val:int ??
+	private SeparateChainingHashST<Integer, String> synST; //ST for synonyms, key: 
+	private int[] neighbors;
+	private int count;
+
+    /**
+     * Constructs a WordNet object given the files containing the synsets and 
+     * hypernyms.
+     * @param synsets synsets file. 
+     * @param hypernyms hypernyms file.
+     */
+	
+    public WordNet(String synsets, String hypernyms) {
+        //synsets = vertex, hypernyms = edge
+    	this.nounset = new OrderedSet<String>();
+        if ( synsets == null || hypernyms == null) { 
+        	throw new java.lang.NullPointerException( "error: synsets/hypernyms null" ); 
+        }
+        In synsetsinput = new In(synsets);
+        while (synsetsinput.hasNextLine()) {
+        	String line = synsetsinput.readLine();
+        	
+        }
+        //synsetsinput.readAllInts();
+        In hypernymsinput = new In(hypernyms);  
+    	this.digraph = new Digraph(synsetsinput);
+        //hdigraph = new Digraph(hypernymsinput);
+        //do something with noun table here 
+        //add edges
+    }
+
+    /**
+     * Returns all WordNet nouns.
+     * @return all WordNet nouns.
+     */
+    public Iterable<String> nouns() {
+    	return nounset;
+    }
+
+    /**
+     * Returns true if word is a noun, and false otherwise.
+     * @param word word to check.
+     * @return true if word is a noun, and false otherwise.
+     */
+    public boolean isNoun(String word) {
+       if (word == null) { 
+    	   throw new java.lang.NullPointerException("error: word null");
+       }
+       return nounset.contains(word);
+    }
+
+    /**
+     * Returns a synset that is a shortest common ancestor of noun1 and noun2.
+     * @param noun1 noun 1.
+     * @param noun2 noun 2.
+     * @return a synset that is a shortest common ancestor of noun1 and noun2.
+     */
+    public String sca(String noun1, String noun2) {
+       if ( !isNoun(noun1) || !isNoun(noun2) ) {
+    	   throw new java.lang.IllegalArgumentException("error: noun1/noun2 not nouns");
+       }
+       //add to neighbors array = 
+       return "help";
+    }
+
+    /**
+     * Returns the distance between noun1 and noun2.
+     * @param noun1 noun 1.
+     * @param noun2 noun 2.
+     * @return the distance between noun1 and noun2.
+     */
+    public int distance(String noun1, String noun2) {
+    	if ( !isNoun(noun1) || !isNoun(noun2) ) {
+     	   throw new java.lang.IllegalArgumentException("error: noun1/noun2 not nouns");
+        }
+    	//DepthFirst dfo = new DepthFirstOrder();
+    	return 0;
+    }
+
+    /**
+     * Test client. [DO NOT EDIT]
+     * @param args command-line arguments.
+     */
+    public static void main(String[] args) {
+        WordNet wordnet = new WordNet(args[0], args[1]);
+        int nouns = 0;
+        for (String noun : wordnet.nouns()) {
+            nouns++;
+        }
+        StdOut.println(nouns);
+        StdOut.println(wordnet.isNoun(args[2]));
+        StdOut.println(wordnet.isNoun(args[3]));
+        StdOut.println(wordnet.isNoun(args[2] + " " + args[3]));
+        StdOut.println(wordnet.sca(args[2], args[3]));
+        StdOut.println(wordnet.distance(args[2], args[3]));
+    }
+}
